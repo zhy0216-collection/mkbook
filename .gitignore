@@ -1,0 +1,7 @@
+site/
+env/
+dist/
+htmlcov/
+*.pyc
+.coverage
+.DS_Store
