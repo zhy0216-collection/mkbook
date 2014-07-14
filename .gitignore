@@ -2,6 +2,8 @@ site/
 env/
 dist/
 htmlcov/
+content/
+output/
 *.pyc
 .coverage
 .DS_Store
