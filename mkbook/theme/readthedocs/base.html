@@ -4,27 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page_title }}</title>
+  <title>{{ book_title }}</title>
 
   {# CSS #}
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="{{ base_url }}/css/theme.css" type="text/css" />
-  {% for path in extra_css %}
-    <link href="{{ base_url }}/{{ path }}" rel="stylesheet">
+  {% for css in theme.css_list %}
+    <link href="{{ css}}" rel="stylesheet">
   {% endfor %}
 
-  <script type="text/javascript" src="{{ base_url }}/js/theme.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-  {% for path in extra_javascript %}
-    <script src="{{ base_url }}/{{ path }}"></script>
+  {% for path in theme.js_list %}
+    <script src="{{ js }}"></script>
   {% endfor %}
-
-  <style>
-    body {font-size: 90%;}
-    pre, code {font-size: 100%;}
-    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
-  </style>
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -57,7 +47,9 @@
         <div class="rst-content">
           {% include "breadcrumbs.html" %}
           <div role="main">
+          {%block content%}
             {{ content }}
+          {%endblock%}
           </div>
           {% include "footer.html" %}
         </div>
