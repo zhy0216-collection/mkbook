@@ -11,3 +11,7 @@ def parse_filename(filename):
         return result[0]
     else:
         return (0, filename)
+
+def get_create_time(filename):
+    return os.path.getctime(filename)
+
