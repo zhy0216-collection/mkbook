@@ -29,7 +29,9 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      {#
       {% include "toc.html" %}
+      #}
       </div>
       &nbsp;
     </nav>
@@ -45,7 +47,9 @@
       {# PAGE CONTENT #}
       <div class="wy-nav-content">
         <div class="rst-content">
+        {#
           {% include "breadcrumbs.html" %}
+        #}
           <div role="main">
           {%block content%}
             {{ content }}

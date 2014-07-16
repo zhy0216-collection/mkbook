@@ -3,11 +3,12 @@ import os
 
 
 class Theme(object):
-    def __init__(self, theme_url, title=None):
-        self.base_path, name = os.path.split(theme_url)
-        self.title = title or name
-        self.css_list = None
-        self.js_list = None
+    def __init__(self, theme_url, name=None):
+        self.path = theme_url
+        self.base_path, self.name = os.path.split(theme_url)
+        self.name = name or self.name
+        self.css_list = []
+        self.js_list = []
 
         
 
