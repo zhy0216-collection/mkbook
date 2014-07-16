@@ -22,9 +22,10 @@ class FlatBuilder(object):
             os.makedirs(OUTPUT_PATH)
 
         cur_theme_static_folder = os.path.join(self.theme.path, "statics")
-        print "cur_theme_static_folder:%s"%cur_theme_static_folder
-        target_theme_static_folder = os.path.join(OUTPUT_PATH, self.theme.name, "statics")
-        print "target_theme_static_folder:%s"%target_theme_static_folder
+        target_theme_static_folder = os.path.join(OUTPUT_PATH, "statics")
+        if os.path.exists(target_theme_static_folder):
+            shutil.rmtree(target_theme_static_folder)
+
         shutil.copytree(cur_theme_static_folder, target_theme_static_folder)
 
         content = self.flat_page_template.render(**self.render_dict)

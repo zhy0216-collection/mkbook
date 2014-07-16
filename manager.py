@@ -10,9 +10,11 @@ def main():
 @main.command()
 @click.option("--port", default=5000, help="server port")
 def server(port):
-    import threading, SimpleHTTPServer, SocketServer, signal
+    import os, threading, SimpleHTTPServer, SocketServer, signal
+    from mkbook.config import OUTPUT_PATH
     # minimal web server.  serves files relative to the
     # current directory.
+    os.chdir(OUTPUT_PATH)
     Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
     httpd = SocketServer.TCPServer(("", port), Handler)
     thread = threading.Thread(target=httpd.serve_forever)

@@ -6,6 +6,12 @@ last_root_path = os.path.split(root_path)[0]
 join = os.path.join
 
 
+
+# site config
+BOOK_TITLE = "MkBook"
+HOST_URL = "http://127.0.0.1:5000/"
+
+
 # theme config
 THEME_NAME = "readthedocs"
 THEME_PATH = join(root_path, "theme", THEME_NAME)
