@@ -1,3 +1,6 @@
+import time
+import shutil
+
 import click
 
 
@@ -34,7 +37,6 @@ def server(port):
 @click.option("--display", default="flat", help="the book display form")
 @click.option("--path", default="content/", help="the book content path")
 def build(path, display):
-    import time
     from mkbook.builder import FlatBuilder
     start_time = time.time() # seconds
     if display == "flat":
@@ -45,6 +47,23 @@ def build(path, display):
     builder.build()
     hint_text = "Done in %s seconds"%(time.time() - start_time)
     click.echo(click.style(hint_text, fg="red"))
+
+
+@main.command()
+def dev():
+    '''only for development env'''
+    from mkbook.builder import FlatBuilder
+    from mkbook.utils import force_copy
+    start_time = time.time()
+    builder = FlatBuilder(".")
+    builder.build()
+
+    force_copy("./mkbook/statics/bower_components", "./output/bower_components")
+    shutil.copy("./mkbook/statics/mkbook-flat.js", "./output/")
+
+    hint_text = "Done in %s seconds"%(time.time() - start_time)
+    click.echo(click.style(hint_text, fg="red"))
+
 
 
 if __name__ == "__main__":
