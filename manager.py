@@ -10,12 +10,13 @@ def main():
 @main.command()
 @click.option("--port", default=5000, help="server port")
 def server(port):
-    import os, threading, SimpleHTTPServer, SocketServer, signal
+    import os, threading, SimpleHTTPServer, SocketServer, signal, sys
     from mkbook.config import OUTPUT_PATH
     # minimal web server.  serves files relative to the
     # current directory.
     os.chdir(OUTPUT_PATH)
     Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+    SocketServer.TCPServer.allow_reuse_address = True
     httpd = SocketServer.TCPServer(("", port), Handler)
     thread = threading.Thread(target=httpd.serve_forever)
     thread.deamon = True
@@ -23,6 +24,7 @@ def server(port):
     def stop_handler(signum, frame):
         httpd.shutdown()
         click.echo('exit')
+        sys.exit(0)
     click.echo('server running on port {}...'.format(port))
     signal.signal(signal.SIGINT, stop_handler)
     click.echo('press CONTROL-C to stop the server')

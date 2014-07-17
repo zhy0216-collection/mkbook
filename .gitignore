@@ -4,6 +4,13 @@ dist/
 htmlcov/
 content/
 output/
+
+
 *.pyc
 .coverage
 .DS_Store
+
+
+# js stuff
+
+bower_components/
