@@ -17,7 +17,7 @@ THEME_NAME = "readthedocs"
 THEME_PATH = join(root_path, "theme", THEME_NAME)
 
 # content folder
-CONTENT_PATH = join(last_root_path, "contnet")
+CONTENT_PATH = join(last_root_path, "content")
 
 # output
 OUTPUT_PATH = join(last_root_path, "output")

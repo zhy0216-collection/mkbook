@@ -1,8 +1,8 @@
  <ul class="current">
-{% for nav_item in nav %}
-    <li class="toctree-l1 {% if nav_item == current_page%}current{%endif%}">
-        <a class="{% if nav_item == current_page%}current{%endif%}" href="{{ nav_item.url }}">{{ nav_item.title }}</a>
-        {% if nav_item == current_page %}
+{% for chapter in chapter_list %}
+    <li class="toctree-l1">
+        <a class="" href="{{ chapter.index }}">{{ chapter.title|title }}</a>
+        {% if False %}
             <ul>
             {% for toc_item in toc %}
                 <li class="toctree-l2"><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>

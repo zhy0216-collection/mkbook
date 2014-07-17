@@ -17,3 +17,6 @@ class Chapter(object):
     def _parse_chapter_folder_name(self):
         self.index, self.title = parse_filename(self.folder_name)
 
+    def __str__(self):
+        return "<Chapter: %s, %s>" % (self.title, self.index)
+
