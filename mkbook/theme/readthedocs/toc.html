@@ -1,14 +1,11 @@
  <ul class="current">
 {% for chapter in chapter_list %}
     <li class="toctree-l1">
-        <a class="ajax" href="#!{{ chapter.url }}">{{ chapter.title|title }}</a>
+        <a class="toctree-l1-a" href="#!{{ chapter.url }}">{{ chapter.title|title }}</a>
         {% if False %}
             <ul>
             {% for toc_item in toc %}
                 <li class="toctree-l2"><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
-                {% for toc_item in toc_item.children %}
-                    <li><a class="toctree-l3" href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
-                {% endfor %}
             {% endfor %}
             </ul>
         {% endif %}

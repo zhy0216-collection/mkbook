@@ -25,8 +25,10 @@
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="{{ homepage_url }}" class="icon icon-home"> {{ site_name }}</a>
+        <a href="{{ homepage_url }}" class="icon icon-home"> {{ book_title }}</a>
+        {#
         {% include "searchbox.html" %}
+        #}
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
@@ -64,9 +66,7 @@
 
 <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      <span><a href="" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      <span style="margin-left: 15px"><a href="" style="color: #fcfcfc">Next &raquo;</a></span>
+      <a class="icon icon-book" style="float: left; color: #fcfcfc"> {{book_title}}</a>
     </span>
 </div>
 </body>

@@ -3,6 +3,7 @@ import shutil
 
 from jinja2 import Environment, FileSystemLoader
 
+import config
 from config import THEME_PATH, CONTENT_PATH, OUTPUT_PATH
 from model import Chapter, Section, Theme
 from utils import force_copy
@@ -16,7 +17,9 @@ class FlatBuilder(object):
         self.chapter_list = []
 
         self.render_dict = {
-            "theme": self.theme
+            "theme": self.theme,
+            "book_title": config.BOOK_TITLE,
+            "home_url": config.HOST_URL,
 
         }
 
