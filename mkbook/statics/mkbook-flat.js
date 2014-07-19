@@ -11,6 +11,24 @@ require.config({
 });
 
 require(["jquery", "swig", "marked"], function($, swig, marked) {
+    function mypajx(url) {
+        $.get(url)
+            .done(function(data) {
+                $("#doc-content").html(marked(data));
+            })
+    }
+
+    // if hash is #!/something, load /something
+    (function() {
+        var hash = window.location.hash;
+        if (hash[1] == "!") {
+            var url = window.location.hash.substr(2);
+            mypajx(url);
+        }
+    })();
+
+
+
     marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -21,7 +39,7 @@ require(["jquery", "swig", "marked"], function($, swig, marked) {
         smartLists: true,
         smartypants: false
     });
-
+    /*
     $("a.ajax").on("click", function(e) {
         e.preventDefault();
         var url = $(this).attr("href");
@@ -31,8 +49,17 @@ require(["jquery", "swig", "marked"], function($, swig, marked) {
             })
 
     })
+*/
 
 
+
+    $(window).on('hashchange', function() {
+        var hash = window.location.hash;
+        if (hash[1] == "!") {
+            var url = window.location.hash.substr(2);
+            mypajx(url);
+        }
+    });
 
 
 });
