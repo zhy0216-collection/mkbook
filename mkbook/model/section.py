@@ -8,6 +8,7 @@ class Section(object):
     def __init__(self, file_url):
         self.id = gen_id()
         self.folder_name, self.filename = os.path.split(file_url)
+        self.url = ""
         self.title = ""
         self.index = 0
         self.content = ""

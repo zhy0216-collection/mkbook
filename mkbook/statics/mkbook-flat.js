@@ -2,16 +2,37 @@ require.config({
     baseUrl: 'bower_components',
     paths: {
         jquery: 'jquery/dist/jquery',
-        pjax: 'jquery-pjax/jquery.pjax',
-        swig: 'civswig/swig'
+        swig: 'civswig/swig',
+        marked: "marked/lib/marked"
     },
     "shim": {
         "pjax": ["jquery"]
     }
 });
 
-require(["jquery", "swig", "pjax"], function($, swig) {
-    console.log($);
-    console.log($.fn.pjax);
-    console.log(swig);
+require(["jquery", "swig", "marked"], function($, swig, marked) {
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false
+    });
+
+    $("a.ajax").on("click", function(e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        $.get(url)
+            .done(function(data) {
+                $("#doc-content").html(marked(data));
+            })
+
+    })
+
+
+
+
 });

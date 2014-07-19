@@ -8,9 +8,11 @@ class Chapter(object):
     def __init__(self, folder_url):
         self.id = gen_id()
         self.title = ""
+        self.url = ""
         self.index = 0
         self.section_list = []
-        self.folder_name = os.path.split(folder_url)[1]
+        self.folder_name = self.filename = os.path.split(folder_url)[1]
+        self.is_folder = True
         self.create_time = get_create_time(folder_url)
         self._parse_chapter_folder_name()
 

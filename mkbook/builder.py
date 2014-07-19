@@ -29,6 +29,7 @@ class FlatBuilder(object):
 
             abs_file_path = os.path.join(CONTENT_PATH, file_name)
             chapter = Chapter(abs_file_path)
+            chapter.url = "/content/%s"%chapter.folder_name
             logger.debug("chapter:%s" % chapter)
             self.chapter_list.append(chapter)
 
