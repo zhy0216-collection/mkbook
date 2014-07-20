@@ -51,6 +51,8 @@ class FlatBuilder(object):
         for file_name in os.listdir(chapter.folder_url):
             abs_file_path = os.path.join(chapter.folder_url, file_name)
             if not os.path.isdir(abs_file_path):
+                if file_name.startswith("."):
+                    continue
                 section = Section(abs_file_path)
                 section.url = chapter.url + "/" + section.filename
                 chapter.add_section(section)
