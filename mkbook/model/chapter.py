@@ -29,7 +29,7 @@ class Chapter(object):
         if not self.is_folder:
             return
 
-        logger.debug("build chapter page here")
+        logger.debug("self.section_list:%s"%self.section_list)
         result = copy.copy(render_dict)
         result["cur_chapter"] = self
 

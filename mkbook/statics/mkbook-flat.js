@@ -27,6 +27,22 @@ require(["jquery", "swig", "marked"], function($, swig, marked) {
         }
     })();
 
+    var curTocTreeOne = null;
+    $(".toctree-l1-a").on("click", function(e) {
+
+        var $this = $(this);
+        if (!$this.hasClass("ajax")) {
+            e.preventDefault();
+        } else {
+
+        }
+        if (curTocTreeOne != null) {
+            curTocTreeOne.removeClass("current");
+        }
+        curTocTreeOne = $this.closest(".toctree-l1");
+        curTocTreeOne.addClass("current");
+    })
+
 
 
     marked.setOptions({

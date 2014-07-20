@@ -45,13 +45,14 @@ class FlatBuilder(object):
 
         self.chapter_list.sort(key=lambda x:x.index)
         self.render_dict["chapter_list"] = self.chapter_list
-        logger.debug("self.render_dict:%s" % self.render_dict)
+        # logger.debug("self.render_dict:%s" % self.render_dict)
 
     def parse_section(self, chapter):
         for file_name in os.listdir(chapter.folder_url):
             abs_file_path = os.path.join(chapter.folder_url, file_name)
             if not os.path.isdir(abs_file_path):
                 section = Section(abs_file_path)
+                section.url = chapter.url + "/" + section.filename
                 chapter.add_section(section)
 
 
