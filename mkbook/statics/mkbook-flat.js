@@ -1,9 +1,9 @@
 require.config({
-    baseUrl: 'bower_components',
+    baseUrl: 'bower_components/',
     paths: {
         jquery: 'jquery/dist/jquery',
         swig: 'civswig/swig',
-        marked: "marked/lib/marked"
+        marked: "marked/lib/marked",
     },
     "shim": {
         "pjax": ["jquery"]
@@ -11,21 +11,13 @@ require.config({
 });
 
 require(["jquery", "swig", "marked"], function($, swig, marked) {
+
     function mypajx(url) {
         $.get(url)
             .done(function(data) {
                 $("#doc-content").html(marked(data));
             })
     }
-
-    // if hash is #!/something, load /something
-    (function() {
-        var hash = window.location.hash;
-        if (hash[1] == "!") {
-            var url = window.location.hash.substr(2);
-            mypajx(url);
-        }
-    })();
 
     function markCurTocTree() {
         var curTocTree = null;
@@ -64,7 +56,13 @@ require(["jquery", "swig", "marked"], function($, swig, marked) {
     })
 
     $(".toctree-l2 a").on("click", function() {
+        markCurTocTreeOne($(this).closest(".toctree-l1"));
         markCurTocTreeTwo($(this).closest(".toctree-l2"));
+    })
+
+    $(".title-a").on("click", function(e) {
+        e.preventDefault();
+        $(".toctree-l1-a").first().click();
     })
 
 
@@ -77,7 +75,8 @@ require(["jquery", "swig", "marked"], function($, swig, marked) {
         pedantic: false,
         sanitize: true,
         smartLists: true,
-        smartypants: false
+        smartypants: false,
+
     });
     /*
     $("a.ajax").on("click", function(e) {
@@ -90,7 +89,20 @@ require(["jquery", "swig", "marked"], function($, swig, marked) {
 
     })
 */
+    // if hash is #!/something, load /something
+    (function() {
+        var hash = window.location.hash;
+        if (hash[1] == "!") {
+            var url = window.location.hash.substr(2);
+            mypajx(url);
+            var index = hash.lastIndexOf("/");
+            if (index > 0) {
+                var filename = hash.substr(index + 1);
+                $("[filename='" + filename + "']").first().click();
+            }
 
+        }
+    })();
 
 
     $(window).on('hashchange', function() {

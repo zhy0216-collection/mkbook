@@ -2,14 +2,14 @@
 {% for chapter in chapter_list %}
     <li class="toctree-l1">
         {%if chapter.is_folder%}
-        <a class="toctree-l1-a" href="{{ chapter.url }}">{{ chapter.title|title }}</a>
+        <a class="toctree-l1-a" href="{{ chapter.url }}" filename="{{chapter.filename}}">{{ chapter.title|title }}</a>
         {%else%}
-        <a class="toctree-l1-a ajax" href="#!{{ chapter.url }}">{{ chapter.title|title }}</a>
+        <a class="toctree-l1-a ajax" href="#!{{ chapter.url }}" filename="{{chapter.filename}}">{{ chapter.title|title }}</a>
         {%endif%}
         {% if chapter.is_folder %}
             <ul>
             {% for section in chapter.section_list %}
-                <li class="toctree-l2"><a href="#!{{ section.url }}">{{ section.title }}</a></li>
+                <li class="toctree-l2"><a href="#!{{ section.url }}" filename="{{section.filename}}">{{ section.title }}</a></li>
             {% endfor %}
             </ul>
         {% endif %}
