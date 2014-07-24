@@ -4,9 +4,6 @@ require.config({
         jquery: 'jquery/dist/jquery',
         swig: 'civswig/swig',
         marked: "marked/lib/marked",
-    },
-    "shim": {
-        "pjax": ["jquery"]
     }
 });
 
