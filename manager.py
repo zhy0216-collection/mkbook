@@ -38,13 +38,34 @@ def server(port):
 @click.option("--path", default="content/", help="the book content path")
 def build(path, display):
     from mkbook.builder import FlatBuilder
+    from mkbook.logger import logger
     start_time = time.time() # seconds
+
+    ## build md stuff
     if display == "flat":
         builder = FlatBuilder(path)
     else:
         pass
 
     builder.build()
+
+    ## compile js stuff
+    import subprocess as sub
+    import os
+    target_js = '%s/mkbook/statics/build.js'%os.getcwd()
+    logger.debug("target_js: %s"%target_js)
+
+    p = sub.Popen('r.js -o %s'%target_js, stderr=sub.PIPE, shell=True)
+    while True:
+        out = p.stderr.read(1)
+        if out == '' and p.poll() != None:
+            break
+        if out != '':
+            sys.stdout.write(out)
+            sys.stdout.flush()
+
+    shutil.copy("./mkbook/statics/out/mkbook-flat.js", "./output/")
+
     hint_text = "Done in %s seconds"%(time.time() - start_time)
     click.echo(click.style(hint_text, fg="red"))
 
